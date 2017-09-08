@@ -2,12 +2,15 @@
 <html>
 <head>
 	<title>JSon Carosel</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-<div id="speakerbox">
-	<div id="carosel"></div>
-</div>
+	<div id="speakerbox">
+		<a href="#" id="prev_btn">&laquo;</a>
+		<a href="#" id="next_btn">&raquo;</a>
+		<div id="carosel"></div>
+	</div>
 </body>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.cycle/3.0.3/jquery.cycle.all.min.js"></script>
@@ -21,15 +24,25 @@
 		<h3>{{bio}}</h3>
 	</div>
 	{{/speakers}}
-	</script>
-	
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$.getJSON('data.json',function(data){
-				var template = $('#speakerstpl').html();
-				var html = Mustache.to_html(template,data);
-				$('#carosel').html(html);
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.getJSON('data.json',function(data){
+			var template = $('#speakerstpl').html();
+			var html = Mustache.to_html(template,data);
+			$('#carosel').html(html);
+
+
+			$('#carosel').cycle({
+				fx :'fade',
+				pause :1,
+				next: '#next_btn',
+				prev: '#prev_btn',
+				speed: 500,
+				timeout:10000
 			});
 		});
+	});
 </script>
 </html>
